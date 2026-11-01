@@ -544,8 +544,10 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
       desc: "An end-to-end analysis of Indian Premier League data: from five raw datasets to answers on batting, bowling and match outcomes.",
       bullets: ["Business questions: who scored the most runs each season, which bowlers are most economical in the powerplay, and does winning the toss win the match?", "Data preparation: removed illegal deliveries, standardized player names, filled missing values and parsed match dates", "Analytical features: running score per innings, high-impact deliveries, win-margin bands (high, medium, low), veteran vs non-veteran players", "Answered with SQL joins and aggregations across ball-by-ball, match and player tables, in PySpark on Databricks"],
       links: [["GitHub", "https://github.com/murtazaahmedd/ipldataanalysis-end-to-end-data-engineering-project"]] },
-    { id: "vigilant", label: "Vigilant Vision", type: "project", year: 2024, sub: "Final-year project · 2024–2025", desc: "AI surveillance that watches CCTV feeds and raises incidents in real time.",
-      bullets: ["Custom YOLO and TensorFlow models for suspicious behavior, SOP violations and crowd density", "OpenCV frame processing streamed over WebRTC to a live dashboard", "Incident analytics with Power BI drill-downs"] },
+    { id: "vigilant", label: "Vigilant Vision", type: "project", year: 2024, sub: "Final-year project · 2024–2025",
+      desc: "AI video analytics that watches CCTV and webcam feeds and raises safety and compliance alerts in real time.",
+      bullets: ["Four detectors run in parallel on every feed: a TensorFlow crowd-counting model plus custom-trained YOLO models for face masks, queues and smoking", "Flask API for live webcam streams and uploaded recordings, analysing every 10th frame against confidence and crowd thresholds", "Every detection is logged to SQLite with camera, location, timestamp and a snapshot image", "React dashboard with a camera library and colour-coded alerts that show the evidence frame"],
+      links: [["GitHub", "https://github.com/murtazaahmedd/VV"]] },
     { id: "python", label: "Python", type: "skill" }, { id: "sql", label: "SQL & PL/pgSQL", type: "skill" },
     { id: "postgres", label: "PostgreSQL", type: "skill" }, { id: "yugabyte", label: "YugabyteDB", type: "skill" },
     { id: "pgvector", label: "pgvector", type: "skill" }, { id: "fastapi", label: "FastAPI", type: "skill" },
@@ -584,7 +586,7 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
     ["tallymarks","sac"],["tallymarks","datasphere"],["tallymarks","dw"],
     ["systems","spark"],["systems","adf"],["systems","powerbi"],["systems","python"],
     ["sadin","lightgbm"],["sadin","anomaly"],["sadin","postgres"],["sadin","dw"],["sadin","fastapi"],["sadin","stats"],["sadin","python"],
-    ["vigilant","cv"],["vigilant","tensorflow"],["vigilant","powerbi"],["vigilant","python"],
+    ["vigilant","cv"],["vigilant","tensorflow"],["vigilant","python"],
     ["yugabyte","postgres"],["langgraph","agents"],["pgvector","embeddings"]
   ];
   const MILESTONES = {
@@ -940,7 +942,7 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
   ];
   const card = w => `<article class="card${["sadin", "callagent", "ipl", "vigilant"].includes(w.id) ? " self" : ""}" style="--c:${TYPES[byId.get(w.id).type].color}">
       <span class="meta">${esc(w.meta)}</span><h3>${esc(w.title)}</h3><p>${esc(w.lead)}</p>
-      ${w.questions ? `<div class="qs"><span>Questions answered</span>${w.questions.map(x => `<div>${esc(x)}</div>`).join("")}</div>` : ""}
+      ${w.questions ? `<div class="qs"><span>${esc(w.qlabel || "Questions answered")}</span>${w.questions.map(x => `<div>${esc(x)}</div>`).join("")}</div>` : ""}
       ${w.stat ? `<div class="highlight"><b>${w.stat[0]}</b><span>${esc(w.stat[1])}</span></div>` : ""}
       <ul>${w.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
       <div class="tags">${w.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
@@ -953,9 +955,10 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
     questions: ["Who scored the most runs each season?", "Which bowlers are most economical in the powerplay?", "Does winning the toss win the match?"],
     points: ["Cleaned and joined ball-by-ball, match, player and team data: illegal deliveries removed, names standardized, gaps filled", "Built analysis features: running score per innings, high-impact deliveries, win-margin bands and player experience segments", "Answered each question with SQL joins and aggregations in PySpark on Databricks"],
     tags: ["SQL", "Data cleaning", "Exploratory analysis", "Python", "PySpark"], link: ["GitHub", "https://github.com/murtazaahmedd/ipldataanalysis-end-to-end-data-engineering-project"] });
-  WORK.push({ id: "vigilant", meta: "Final-year project · 2024–2025", title: "Vigilant Vision", lead: "AI surveillance that watches CCTV feeds and raises incidents in real time.",
-    points: ["Custom YOLO and TensorFlow models for suspicious behavior, SOP violations and crowd density", "OpenCV frame processing streamed over WebRTC to a live dashboard", "Incident analytics with Power BI drill-downs"],
-    tags: ["YOLO", "TensorFlow", "OpenCV", "WebRTC", "Power BI"] });
+  WORK.push({ id: "vigilant", meta: "Final-year project · 2024–2025", title: "Vigilant Vision", lead: "AI video analytics that watches CCTV and webcam feeds and raises safety and compliance alerts in real time.",
+    qlabel: "What it detects", questions: ["Crowd build-up and headcount", "People without face masks", "Long queues", "Smoking in restricted areas"],
+    points: ["Four models run in parallel per feed: TensorFlow crowd counting plus three custom-trained YOLO detectors", "Flask API for live webcam streams and uploaded video, sampling every 10th frame against confidence thresholds to stay real-time", "Detections logged to SQLite with camera, location, time and a snapshot; a React dashboard shows colour-coded alerts with the evidence frame"],
+    tags: ["YOLO", "TensorFlow", "OpenCV", "Flask", "React", "SQLite"], link: ["GitHub", "https://github.com/murtazaahmedd/VV"] });
   const workIds = ["chhg", "analytics", "gtm"], selfIds = ["sadin", "callagent", "ipl", "vigilant"];
   document.getElementById("workGrid").innerHTML =
     `<div class="group-head" style="--c:#38d6ff"><span>01</span><h3>Work at Codet.ai</h3><button class="chip" type="button" data-go="cat-work">Open Work in graph ↑</button></div>` +
