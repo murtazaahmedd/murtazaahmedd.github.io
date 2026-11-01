@@ -216,6 +216,9 @@ kbd { font: 11px var(--mono); border: 1px solid var(--line); border-bottom-width
 .group-head span { font: 500 12px var(--mono); color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 50%, transparent); border-radius: 6px; padding: 2px 7px; }
 .group-head h3 { margin: 0; font: 700 21px var(--display); }
 .group-head .chip { margin-left: auto; }
+.card .qs { margin-top: 16px; display: grid; gap: 6px; position: relative; z-index: 1; }
+.card .qs span { font: 500 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.card .qs div { font-size: 14px; font-weight: 600; padding: 8px 12px; border-radius: 10px; background: color-mix(in srgb, var(--c) 10%, transparent); border: 1px solid color-mix(in srgb, var(--c) 30%, transparent); }
 /* experience */
 .xp { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 .xp h4 { font: 500 13px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 18px; }
@@ -488,7 +491,7 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
       desc: "I build the knowledge, retrieval and analytics layers that AI agents run on: graph databases, hybrid search, data warehouses and real-time voice agents." },
     { id: "cat-edu", label: "Education", type: "category", year: 2019, sub: "Category", desc: "Where I studied, from school to my computer science degree." },
     { id: "cat-work", label: "Work", type: "category", year: 2024, sub: "Category", desc: "Professional roles and the systems I built in them." },
-    { id: "cat-self", label: "Self projects", type: "category", year: 2024, sub: "Category", desc: "Projects I built on my own: an energy forecasting platform, a voice AI patient-registration agent, a Spark data pipeline, and my final-year computer vision project." },
+    { id: "cat-self", label: "Self projects", type: "category", year: 2024, sub: "Category", desc: "Projects I built on my own: an energy forecasting platform, a voice AI patient-registration agent, an IPL data analysis project, and my final-year computer vision project." },
     { id: "happyhome", label: "Happy Home School", type: "education", year: 2019, sub: "School · completed 2019", desc: "Completed my schooling at Happy Home School." },
     { id: "agakhan", label: "Aga Khan Higher Secondary School", short: "Aga Khan HSS", type: "education", year: 2019, sub: "Higher secondary · 2019–2021", desc: "Higher secondary education before starting computer science at FAST-NUCES." },
     { id: "fast", label: "FAST-NUCES", type: "education", year: 2021, sub: "B.S. Computer Science · 2021–2025", desc: "National University of Computer and Emerging Sciences, Karachi.",
@@ -537,9 +540,9 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
       desc: "A phone agent that registers new patients over a real call, recognizes returning callers and offers to update their record.",
       bullets: ["Vapi handles telephony, speech and GPT-4o orchestration; tools call a FastAPI backend over a webhook", "One shared validation layer for the voice agent and the REST API, so the agent can never bypass a rule", "Reads the full record back for confirmation before saving, and re-asks only the field that failed", "Postgres on Render via Docker, soft deletes, 30 tests"],
       links: [["GitHub", "https://github.com/murtazaahmedd/calling-agent"], ["API docs", "https://calling-agent-api.onrender.com/docs"]] },
-    { id: "ipl", label: "IPL data pipeline on Spark", short: "IPL Spark pipeline", type: "project", year: 2024, sub: "Personal project · 2024",
-      desc: "A PySpark pipeline on Databricks that ingests five IPL cricket datasets from S3, cleans and enriches them, and answers analytics questions in Spark SQL.",
-      bullets: ["Schema-enforced ingestion of ball-by-ball, match, player, player-match and team tables with explicit StructType schemas", "Cleaning rules: legal-delivery filtering, name normalization, null handling and date parsing", "Window functions for running totals per innings, plus derived features such as high-impact balls and toss-to-win outcome", "Multi-table Spark SQL: top scorers per season, most economical powerplay bowlers, toss impact"],
+    { id: "ipl", label: "IPL cricket performance analytics", short: "IPL analytics", type: "project", year: 2024, sub: "Data analysis project · 2024",
+      desc: "An end-to-end analysis of Indian Premier League data: from five raw datasets to answers on batting, bowling and match outcomes.",
+      bullets: ["Business questions: who scored the most runs each season, which bowlers are most economical in the powerplay, and does winning the toss win the match?", "Data preparation: removed illegal deliveries, standardized player names, filled missing values and parsed match dates", "Analytical features: running score per innings, high-impact deliveries, win-margin bands (high, medium, low), veteran vs non-veteran players", "Answered with SQL joins and aggregations across ball-by-ball, match and player tables, in PySpark on Databricks"],
       links: [["GitHub", "https://github.com/murtazaahmedd/ipldataanalysis-end-to-end-data-engineering-project"]] },
     { id: "vigilant", label: "Vigilant Vision", type: "project", year: 2024, sub: "Final-year project · 2024–2025", desc: "AI surveillance that watches CCTV feeds and raises incidents in real time.",
       bullets: ["Custom YOLO and TensorFlow models for suspicious behavior, SOP violations and crowd density", "OpenCV frame processing streamed over WebRTC to a live dashboard", "Incident analytics with Power BI drill-downs"] },
@@ -557,14 +560,14 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
     { id: "powerbi", label: "Power BI", type: "skill" }, { id: "sac", label: "SAP Analytics Cloud", type: "skill" },
     { id: "datasphere", label: "SAP Datasphere", type: "skill" }, { id: "typescript", label: "TypeScript", type: "skill" },
     { id: "voiceai", label: "Voice AI", type: "skill" }, { id: "eventsourcing", label: "Event sourcing", type: "skill" },
-    { id: "cv", label: "Computer vision", type: "skill" }, { id: "s3", label: "AWS S3", type: "skill" }, { id: "tensorflow", label: "TensorFlow", type: "skill" }
+    { id: "cv", label: "Computer vision", type: "skill" }, { id: "s3", label: "AWS S3", type: "skill" }, { id: "analysis", label: "Data analysis", type: "skill" }, { id: "tensorflow", label: "TensorFlow", type: "skill" }
   ];
   const EDGES = [
     ["murtaza","cat-edu"],["murtaza","cat-work"],["murtaza","cat-self"],
     ["cat-edu","happyhome"],["cat-edu","agakhan"],["cat-edu","fast"],
     ["cat-work","systems"],["cat-work","tallymarks"],["cat-work","codet"],
     ["cat-self","sadin"],["cat-self","vigilant"],["cat-self","callagent"],["cat-self","ipl"],
-    ["ipl","spark"],["ipl","sql"],["ipl","python"],["ipl","s3"],["ipl","dw"],
+    ["ipl","analysis"],["ipl","sql"],["ipl","spark"],["ipl","python"],["tallymarks","analysis"],["analytics","analysis"],["powerbi","analysis"],
     ["callagent","voiceai"],["callagent","fastapi"],["callagent","postgres"],["callagent","agents"],["callagent","docker"],["callagent","python"],["fast","vigilant"],
     ["codet","chhg"],["codet","analytics"],["codet","gtm"],
     ["chhg","retrieval"],["chhg","reasoning"],["chhg","pagerank"],["chhg","prompts"],["chhg","gitgraph"],
@@ -937,6 +940,7 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
   ];
   const card = w => `<article class="card${["sadin", "callagent", "ipl", "vigilant"].includes(w.id) ? " self" : ""}" style="--c:${TYPES[byId.get(w.id).type].color}">
       <span class="meta">${esc(w.meta)}</span><h3>${esc(w.title)}</h3><p>${esc(w.lead)}</p>
+      ${w.questions ? `<div class="qs"><span>Questions answered</span>${w.questions.map(x => `<div>${esc(x)}</div>`).join("")}</div>` : ""}
       ${w.stat ? `<div class="highlight"><b>${w.stat[0]}</b><span>${esc(w.stat[1])}</span></div>` : ""}
       <ul>${w.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
       <div class="tags">${w.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
@@ -945,9 +949,10 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
   WORK.push({ id: "callagent", meta: "Personal project · 2026", title: "Voice AI patient registration", lead: "A phone agent that registers new patients on a real call, recognizes returning callers and offers to update their record.",
     points: ["Vapi for telephony, speech and GPT-4o; agent tools call a FastAPI backend over a secured webhook", "One validation layer shared by the voice agent and the REST API, with read-back confirmation before any save", "Postgres on Render with Docker, soft deletes and 30 tests covering the API and webhooks"],
     tags: ["Vapi", "FastAPI", "PostgreSQL", "Docker", "Voice AI"], link: ["GitHub", "https://github.com/murtazaahmedd/calling-agent"] });
-  WORK.push({ id: "ipl", meta: "Personal project · 2024", title: "IPL data pipeline on Spark", lead: "A PySpark pipeline on Databricks that turns five raw IPL cricket datasets in S3 into clean, analysis-ready tables.",
-    points: ["Schema-enforced ingestion of ball-by-ball, match, player, player-match and team data with explicit Spark schemas", "Cleaning and enrichment: legal-delivery filtering, name normalization, null handling, window-function running totals", "Spark SQL analytics across joined tables: top scorers per season, powerplay economy, toss impact"],
-    tags: ["PySpark", "Databricks", "Spark SQL", "AWS S3"], link: ["GitHub", "https://github.com/murtazaahmedd/ipldataanalysis-end-to-end-data-engineering-project"] });
+  WORK.push({ id: "ipl", meta: "Data analysis project · 2024", title: "IPL cricket performance analytics", lead: "An end-to-end analysis of Indian Premier League data, from five raw datasets to clear answers about players and matches.",
+    questions: ["Who scored the most runs each season?", "Which bowlers are most economical in the powerplay?", "Does winning the toss win the match?"],
+    points: ["Cleaned and joined ball-by-ball, match, player and team data: illegal deliveries removed, names standardized, gaps filled", "Built analysis features: running score per innings, high-impact deliveries, win-margin bands and player experience segments", "Answered each question with SQL joins and aggregations in PySpark on Databricks"],
+    tags: ["SQL", "Data cleaning", "Exploratory analysis", "Python", "PySpark"], link: ["GitHub", "https://github.com/murtazaahmedd/ipldataanalysis-end-to-end-data-engineering-project"] });
   WORK.push({ id: "vigilant", meta: "Final-year project · 2024–2025", title: "Vigilant Vision", lead: "AI surveillance that watches CCTV feeds and raises incidents in real time.",
     points: ["Custom YOLO and TensorFlow models for suspicious behavior, SOP violations and crowd density", "OpenCV frame processing streamed over WebRTC to a live dashboard", "Incident analytics with Power BI drill-downs"],
     tags: ["YOLO", "TensorFlow", "OpenCV", "WebRTC", "Power BI"] });
@@ -978,7 +983,7 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
     ["DB", "Databases", "#3ee6b0", "Relational, distributed and vector", ["SQL & PL/pgSQL", "sql"], ["PostgreSQL", "postgres"], ["YugabyteDB", "yugabyte"], ["pgvector", "pgvector"], ["SAP HANA"]],
     ["ML", "Machine learning", "#ffc15e", "Models and statistics", ["Statistics", "stats"], ["LightGBM", "lightgbm"], ["Anomaly detection", "anomaly"], ["TensorFlow", "tensorflow"], ["Computer vision", "cv"], ["scikit-learn"]],
     ["BE", "Backend & cloud", "#ff7a8a", "Services that ship", ["Python", "python"], ["FastAPI", "fastapi"], ["TypeScript", "typescript"], ["GCP Cloud Run", "gcp"], ["Docker", "docker"], ["Azure"], ["Git"]],
-    ["BI", "Analytics & BI", "#8ea2c8", "Dashboards and planning", ["Power BI", "powerbi"], ["SAP Analytics Cloud", "sac"], ["SAP Datasphere", "datasphere"], ["SAP BDC"]]
+    ["BI", "Analytics & BI", "#8ea2c8", "Analysis, dashboards and planning", ["Data analysis", "analysis"], ["Power BI", "powerbi"], ["SAP Analytics Cloud", "sac"], ["SAP Datasphere", "datasphere"], ["SAP BDC"]]
   ];
   document.getElementById("skillGrid").innerHTML = SK.map(([ab, title, c, sub, ...items]) => `<div class="skill-box" style="--c:${c}"><h4><i>${ab}</i>${esc(title)}</h4><p>${esc(sub)}</p><div class="chips">${items.map(([l, id]) => id ? `<button type="button" class="chip ingraph" data-go="${id}">${esc(l)}</button>` : `<span class="chip" style="cursor:default">${esc(l)}</span>`).join("")}</div></div>`).join("");
 
