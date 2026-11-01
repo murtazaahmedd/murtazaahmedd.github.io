@@ -488,7 +488,7 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
       desc: "I build the knowledge, retrieval and analytics layers that AI agents run on: graph databases, hybrid search, data warehouses and real-time voice agents." },
     { id: "cat-edu", label: "Education", type: "category", year: 2019, sub: "Category", desc: "Where I studied, from school to my computer science degree." },
     { id: "cat-work", label: "Work", type: "category", year: 2024, sub: "Category", desc: "Professional roles and the systems I built in them." },
-    { id: "cat-self", label: "Self projects", type: "category", year: 2024, sub: "Category", desc: "Projects I built on my own: a personal forecasting platform and my final-year computer vision project." },
+    { id: "cat-self", label: "Self projects", type: "category", year: 2024, sub: "Category", desc: "Projects I built on my own: an energy forecasting platform, a voice AI patient-registration agent, and my final-year computer vision project." },
     { id: "happyhome", label: "Happy Home School", type: "education", year: 2019, sub: "School · completed 2019", desc: "Completed my schooling at Happy Home School." },
     { id: "agakhan", label: "Aga Khan Higher Secondary School", short: "Aga Khan HSS", type: "education", year: 2019, sub: "Higher secondary · 2019–2021", desc: "Higher secondary education before starting computer science at FAST-NUCES." },
     { id: "fast", label: "FAST-NUCES", type: "education", year: 2021, sub: "B.S. Computer Science · 2021–2025", desc: "National University of Computer and Emerging Sciences, Karachi.",
@@ -533,6 +533,10 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
       desc: "Forecasts daily kWh for every meter of a facility, estimates the bill and flags unusual meter-days.",
       bullets: ["Two-stage forecaster: Huber regression plus a LightGBM residual model", "95% day-ahead accuracy with leak-free walk-forward validation", "Medallion warehouse in PostgreSQL that validates raw meter telemetry", "Isolation Forest incidents ranked by kWh and cost impact"],
       links: [["GitHub", "https://github.com/murtazaahmedd/SADINHUB"]] },
+    { id: "callagent", label: "Voice AI patient registration", short: "Voice patient agent", type: "project", year: 2026, sub: "Personal project · 2026",
+      desc: "A phone agent that registers new patients over a real call, recognizes returning callers and offers to update their record.",
+      bullets: ["Vapi handles telephony, speech and GPT-4o orchestration; tools call a FastAPI backend over a webhook", "One shared validation layer for the voice agent and the REST API, so the agent can never bypass a rule", "Reads the full record back for confirmation before saving, and re-asks only the field that failed", "Postgres on Render via Docker, soft deletes, 30 tests"],
+      links: [["GitHub", "https://github.com/murtazaahmedd/calling-agent"], ["API docs", "https://calling-agent-api.onrender.com/docs"]] },
     { id: "vigilant", label: "Vigilant Vision", type: "project", year: 2024, sub: "Final-year project · 2024–2025", desc: "AI surveillance that watches CCTV feeds and raises incidents in real time.",
       bullets: ["Custom YOLO and TensorFlow models for suspicious behavior, SOP violations and crowd density", "OpenCV frame processing streamed over WebRTC to a live dashboard", "Incident analytics with Power BI drill-downs"] },
     { id: "python", label: "Python", type: "skill" }, { id: "sql", label: "SQL & PL/pgSQL", type: "skill" },
@@ -555,7 +559,8 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
     ["murtaza","cat-edu"],["murtaza","cat-work"],["murtaza","cat-self"],
     ["cat-edu","happyhome"],["cat-edu","agakhan"],["cat-edu","fast"],
     ["cat-work","systems"],["cat-work","tallymarks"],["cat-work","codet"],
-    ["cat-self","sadin"],["cat-self","vigilant"],["fast","vigilant"],
+    ["cat-self","sadin"],["cat-self","vigilant"],["cat-self","callagent"],
+    ["callagent","voiceai"],["callagent","fastapi"],["callagent","postgres"],["callagent","agents"],["callagent","docker"],["callagent","python"],["fast","vigilant"],
     ["codet","chhg"],["codet","analytics"],["codet","gtm"],
     ["chhg","retrieval"],["chhg","reasoning"],["chhg","pagerank"],["chhg","prompts"],["chhg","gitgraph"],
     ["chhg","yugabyte"],["chhg","pgvector"],["chhg","kg"],["chhg","fastapi"],["chhg","python"],
@@ -644,7 +649,7 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
 
   /* layout: each part of the story gets its own region */
   const HOMES = { "cat-edu": [-210, 20], happyhome: [-400, 150], agakhan: [-440, 10], fast: [-380, -130],
-    "cat-self": [-110, 220], vigilant: [-300, 330], sadin: [-20, 370],
+    "cat-self": [-110, 220], vigilant: [-300, 330], sadin: [-20, 370], callagent: [-170, 420],
     "cat-work": [120, -110], systems: [-60, -300], tallymarks: [150, -320], codet: [310, -40],
     chhg: [500, -210], analytics: [520, 150], gtm: [340, 280] };
   const PARENT = { retrieval: "chhg", reasoning: "chhg", pagerank: "chhg", prompts: "chhg", gitgraph: "chhg",
@@ -925,17 +930,20 @@ footer .wrap > div { display: flex; justify-content: space-between; gap: 16px; f
       points: ["Two-stage model: Huber regression plus a LightGBM residual, with leak-free walk-forward validation", "Medallion (bronze, silver, gold) warehouse in PostgreSQL", "Isolation Forest incidents ranked by kWh and cost impact"],
       tags: ["LightGBM", "scikit-learn", "PostgreSQL", "FastAPI"], link: ["GitHub", "https://github.com/murtazaahmedd/SADINHUB"] }
   ];
-  const card = w => `<article class="card${w.id === "sadin" || w.id === "vigilant" ? " self" : ""}" style="--c:${TYPES[byId.get(w.id).type].color}">
+  const card = w => `<article class="card" style="--c:${TYPES[byId.get(w.id).type].color}">
       <span class="meta">${esc(w.meta)}</span><h3>${esc(w.title)}</h3><p>${esc(w.lead)}</p>
       ${w.stat ? `<div class="highlight"><b>${w.stat[0]}</b><span>${esc(w.stat[1])}</span></div>` : ""}
       <ul>${w.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
       <div class="tags">${w.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
       <div class="card-foot"><button class="btn btn-ghost btn-sm" type="button" data-go="${w.id}">View in graph ↑</button>${w.link ? `<a class="btn btn-ghost btn-sm" href="${w.link[1]}" target="_blank" rel="noopener">${w.link[0]} ↗</a>` : ""}</div>
     </article>`;
+  WORK.push({ id: "callagent", meta: "Personal project · 2026", title: "Voice AI patient registration", lead: "A phone agent that registers new patients on a real call, recognizes returning callers and offers to update their record.",
+    points: ["Vapi for telephony, speech and GPT-4o; agent tools call a FastAPI backend over a secured webhook", "One validation layer shared by the voice agent and the REST API, with read-back confirmation before any save", "Postgres on Render with Docker, soft deletes and 30 tests covering the API and webhooks"],
+    tags: ["Vapi", "FastAPI", "PostgreSQL", "Docker", "Voice AI"], link: ["GitHub", "https://github.com/murtazaahmedd/calling-agent"] });
   WORK.push({ id: "vigilant", meta: "Final-year project · 2024–2025", title: "Vigilant Vision", lead: "AI surveillance that watches CCTV feeds and raises incidents in real time.",
     points: ["Custom YOLO and TensorFlow models for suspicious behavior, SOP violations and crowd density", "OpenCV frame processing streamed over WebRTC to a live dashboard", "Incident analytics with Power BI drill-downs"],
     tags: ["YOLO", "TensorFlow", "OpenCV", "WebRTC", "Power BI"] });
-  const workIds = ["chhg", "analytics", "gtm"], selfIds = ["sadin", "vigilant"];
+  const workIds = ["chhg", "analytics", "gtm"], selfIds = ["sadin", "callagent", "vigilant"];
   document.getElementById("workGrid").innerHTML =
     `<div class="group-head" style="--c:#38d6ff"><span>01</span><h3>Work at Codet.ai</h3><button class="chip" type="button" data-go="cat-work">Open Work in graph ↑</button></div>` +
     WORK.filter(w => workIds.includes(w.id)).map(card).join("") +
